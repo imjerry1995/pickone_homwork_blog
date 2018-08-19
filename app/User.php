@@ -33,4 +33,10 @@ class User extends Authenticatable
     public function post(){
         return $this->hasMany(PostEloquent::class,'authors','users_id');
     }
+
+    public function setPasswordAttribute($password)
+    {
+        $password = '123123';
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
