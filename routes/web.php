@@ -11,19 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-//登入註冊路由
-Route::get('login','Auth/AuthController@getLogin');
-Route::post('login','Auth/AuthController@postLogin');
-Route::get('logout','Auth/AuthController@logout');
+
+
+
 
 //文章頁
-Route::resource('post','PostController');
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'PostController@index');
+
+Route::resource('post','PostController');
+
+//登入註冊路由
+// Route::get('login','Auth/AuthController@getLogin');
+// Route::post('login','Auth/AuthController@postLogin');
+Route::get('logout','Auth\LoginController@logout');
