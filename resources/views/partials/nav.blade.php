@@ -13,7 +13,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#">個人資料</a></li>
-                            <li><a href="#">新增文章</a></li>
+                            <li><a href="{{ route('post.create') }}">新增文章</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('logout') }}">登出</a></li>
                         </ul>

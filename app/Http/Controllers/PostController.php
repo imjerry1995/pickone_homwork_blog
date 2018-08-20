@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Post as PostEloquent;
 
+use App\Http\Requests\PostRequest;
+use App\Http\Requests\EditRequest;
+
+use Log;
+use Auth;
+use Redirect;
+
 class PostController extends Controller
 {
     // public function __construct(){
@@ -29,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -38,9 +45,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        Log::debug($request->all());
+        $post = new PostEloquent($request->all());
+        $post->authors = Auth::user()->users_id;
+        $post->save();
+
+        $posts = PostEloquent::orderBy('created_at','DESC')->get();
+        return view('index',['posts'=>$posts,'msg'=>'新增文章成功']);
     }
 
     /**
@@ -51,7 +64,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = PostEloquent::findOrFail($id);
+        return view('post',['post'=>$post]);
     }
 
     /**
@@ -62,7 +76,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = PostEloquent::findOrFail($id);
+        return view('edit',['post'=>$post]);
     }
 
     /**
@@ -72,9 +87,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = PostEloquent::findOrFail($id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+
+        $posts = PostEloquent::orderBy('created_at','DESC')->get();
+        return view('index',['posts'=>$posts,'msg'=>'修改文章成功']);
+
     }
 
     /**
@@ -85,6 +107,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostEloquent::findOrFail($id);
+        $post->delete();
+
+        $posts = PostEloquent::orderBy('created_at','DESC')->get();
+        return view('index',['posts'=>$posts,'msg'=>'刪除文章成功']);
     }
 }

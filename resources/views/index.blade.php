@@ -5,6 +5,9 @@
 @section('content')
     <div class="content col-md-8">
         <div class="row">
+            @if(isset($msg))
+                @include('partials.message')
+            @endif
             @forelse($posts as $post)
                 <div class="article col-sm-12">
                     <h3>{{ $post->title }}</h3>
@@ -12,12 +15,12 @@
                         <p>作者：<a href="">{{ $post->authors }}</a> | 發文時間：{{ $post->timestamp }}</p>
                     </div>
                     <div class="cover">
-                        <img src="{{ $post->cover_img }}" alt="{{ $post->title }}的封面圖片">
+                        <img src="{{ $post->pic }}" alt="{{ $post->title }}的封面圖片">
                     </div>
                     <div class="preview">
                         <p>{{ $post->content }}</p>
                     </div>
-                    <a href="{{ route('post.show',['post'=>'post_id']) }}">閱讀全文</a>
+                    <a href="{{ action('PostController@show',['post'=>$post->id]) }}">閱讀全文</a>
                 </div>
             @empty
                 <p class="text-center">

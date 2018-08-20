@@ -34,3 +34,4 @@ Route::resource('post','PostController');
 // Route::get('login','Auth/AuthController@getLogin');
 // Route::post('login','Auth/AuthController@postLogin');
 Route::get('logout','Auth\LoginController@logout');
+
