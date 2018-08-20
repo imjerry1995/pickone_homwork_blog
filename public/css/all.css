@@ -1,0 +1,119 @@
+body{
+    background-color:#F8F9F9;
+}
+
+footer{
+    text-align: center;
+    padding: 50px;
+    background-color: #4D717E;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+footer>.container>p>a {
+    color: #fff ;
+}
+
+
+.navbar-default{
+    border-color : transparent;
+    box-shadow: 0 0.125rem 1rem rgba(183, 183, 206, 0.2);
+    background-color: #fff;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.detail>p>a {
+    color: #4D717E;
+}
+
+.wrapper{
+    margin-top: 100px;
+}
+
+.sidebar{
+    margin-bottom: 50px;
+}
+
+.sidebar,
+.article,
+.author_intro {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.sidebar>img,
+.cover > img{
+    width: 100%;
+    /* border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 99em; */
+}
+
+.author_intro>img{
+    width: 50%;
+    margin: 10px;
+}
+
+.sidebar > h2{
+    text-align: center;
+    padding: 0px 20px 20px 20px;
+}
+
+.article{
+    margin-bottom: 30px;
+}
+
+
+.article>h3,
+.detail {
+    text-align: center;
+}
+
+.article>hr {
+    width: 80%;
+}
+
+.article>.btn.btn-warning {
+    margin: 20px;
+}
+
+.preview,
+.allContent >p{
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+
+.author_intro{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.nav.navbar-nav.navbar-right>li>.btn-group>.btn.btn-warning.dropdown-toggle{
+    margin: 8px;
+    background-color: #4D717E;
+    border-color: #4D717E;
+}
+
+#modify{
+    padding: 20px;
+    float: right;
+}
+
+.clear{
+    clear: both;
+}
+
+.btn.btn-default.edit{
+    float: right;
+    margin-bottom: 50px;
+    background-color: #4D717E;
+    border-color: #4D717E;
+    color: #ffffff;
+}
+
+.artical_raw{
+    margin-left: 0px;
+    margin-right: 0px;
+}

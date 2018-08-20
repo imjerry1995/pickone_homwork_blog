@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="content col-md-12">
-        <div class="row">
+        <div class="row artical_raw">
             <div class="page-header">
                 <h2>新增文章</h2>
             </div>
@@ -32,7 +32,7 @@
                     <label for="exampleInputFile">上傳封面照片</label>
                     <input type="file" id="exampleInputFile">
                 </div> -->
-                <button type="submit" class="btn btn-default">送出</button>
+                <button type="submit" class="btn btn-default edit">送出</button>
             </form>
             
         </div>

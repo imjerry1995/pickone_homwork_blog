@@ -6,12 +6,14 @@
 </head>
 <body>
     @include('partials.nav')
-    <div class="adjust" style="margin-top:50px"></div>
-    <div class="container">
-        <div class="row">
-            @yield('content')
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                @yield('content')
+            </div>
         </div>
-    </div>
-    @include('partials.footer')
+        @include('partials.footer')
+    </div>    
+    
 </body>
 </html>

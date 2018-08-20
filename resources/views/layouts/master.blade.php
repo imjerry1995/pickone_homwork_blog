@@ -6,15 +6,17 @@
 </head>
 <body>
     @include('partials.nav')
-    <div class="adjust" style="margin-top:50px"></div>
-    <div class="container">
-        <div class="row">
-            @section('sidebar')
-                @include('partials.sidebar')
-            @show
-            @yield('content')
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                @section('sidebar')
+                    @include('partials.sidebar')
+                @show
+                @yield('content')
+            </div>
         </div>
+        @include('partials.footer')
     </div>
-    @include('partials.footer')
+    
 </body>
 </html>
