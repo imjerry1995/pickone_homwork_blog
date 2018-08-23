@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -38,4 +40,27 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Overrides AuthenticatesUsers method
+     * login
+     */
+
+    public function login(Request $request){
+        if(Auth::attempt(['account'=>$request->account,'password'=>$request->password],$request->remember)||
+        Auth::attempt(['email'=>$request->account,'password'=>$request->password],$request->remember))
+        return $this->sendLoginResponse($request);
+    }
+
+    /**
+     * Overrides AuthenticatesUsers method
+     * username
+     */
+
+    public function username()
+    {
+        return 'account';
+    }
+
+
 }
