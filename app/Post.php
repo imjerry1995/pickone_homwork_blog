@@ -28,7 +28,7 @@ class Post extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(UserEloquent::class,'authors','users_id');
+        return $this->belongsTo(UserEloquent::class,'authors','account');
     }
 
     public function comment(){

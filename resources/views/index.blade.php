@@ -14,7 +14,7 @@
                         <h3>{{ $post->title }}</h3>
                         <hr>
                         <div class="detail">
-                            <p>作者：<a href="">{{ $post->authors }}</a> | 發文時間：{{ $post->timestamp }}</p>
+                            <p>作者：<a href="">{{ $post->authors }}</a> | 發文時間：{{ $post->created_at }}</p>
                         </div>
                         <div class="cover">
                             <img src="{{ $post->pic }}" alt="{{ $post->title }}的封面圖片">

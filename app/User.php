@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     //0819新增user_id
     protected $fillable = [
-        'name', 'email', 'password','users_id'
+        'name', 'email', 'password','account'
     ];
 
     /**
@@ -31,7 +31,7 @@ class User extends Authenticatable
     ];
 
     public function post(){
-        return $this->hasMany(PostEloquent::class,'authors','users_id');
+        return $this->hasMany(PostEloquent::class,'authors','account');
     }
 
     // public function setPasswordAttribute($password)

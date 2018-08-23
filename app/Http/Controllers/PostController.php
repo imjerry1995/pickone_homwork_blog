@@ -49,7 +49,7 @@ class PostController extends Controller
     {
         Log::debug($request->all());
         $post = new PostEloquent($request->all());
-        $post->authors = Auth::user()->users_id;
+        $post->authors = Auth::user()->account;
         $post->save();
 
         $posts = PostEloquent::orderBy('created_at','DESC')->get();
