@@ -29,6 +29,7 @@
                         沒有文章囉！趕快來投稿吧！
                     </p>
                 @endforelse
+                {{$posts->links()}}
             </div>
         </div>
     

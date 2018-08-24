@@ -17,7 +17,7 @@
                 
                     <div class="article col-sm-12">
                         @if(Auth::check())
-                            @if(Auth::user()->users_id == $post->authors)
+                            @if(Auth::user()->account == $post->authors)
                                 <form method="POST" action="{{ route('post.destroy',['post'=>$post->id]) }}" id="modify">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
@@ -48,7 +48,55 @@
                             <p>{{ $post->content }}</p>
                         </div>
                     </div>
-                
+                    <div class="comment col-sm-12">
+                    @forelse($comments as $comment)
+                        <div class="show_all">
+                            <div class="name">{{ $comment->name }}</div>
+                            <div class="time">{{ $comment->created_at }}</div>
+                            <hr>
+                            <div class="c_content">
+                                {{ $comment->content }}
+                            </div>
+                            @if(Auth::check())
+                                @if(Auth::user()->account == $post->authors)
+                                    <form method="POST" action="{{ route('comment.destroy',['id'=>$comment->id,'post_id'=>'$post->id']) }}" id="modify">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button type="submit" class="btn btn-default btn-danger">刪除留言</button>
+                                    </form>
+                                    <div class="clear"></div>
+                                @endif
+                            @endif
+                            
+                        </div>
+                    @empty
+                        <p>來當第一個留言的吧！</p>
+                    @endforelse
+                        <div class="post_comment">
+                            <form method="POST" action=" {{ action('CommentController@store',['post_id'=>$post->id]) }} ">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="name">姓名</label>
+                                    <input type="text" class="form-control" name="name" placeholder="輸入留言姓名">
+                                </div>
+                                @if($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong style="color:red;">{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                                <div class="form-group">
+                                    <label for="content">留言</label>
+                                    <textarea class="form-control" rows="3" name="content">說點什麼吧</textarea>
+                                </div>
+                                @if($errors->has('content'))
+                                    <span class="help-block">
+                                        <strong style="color:red;">{{ $errors->first('content') }}</strong>
+                                    </span>
+                                @endif
+                                <button type="submit" class="btn btn-default edit">送出</button>
+                            </form>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

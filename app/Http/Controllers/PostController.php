@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Post as PostEloquent;
+use App\Comment as CommnetEloquent;
 
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\EditRequest;
@@ -25,9 +26,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = PostEloquent::orderBy('created_at','DESC')->get();
+        $posts = PostEloquent::orderBy('created_at','DESC')->simplePaginate(5);
+        foreach($posts as $post){
+            $post->content = str_limit($post->content, 50);
+            // Log::debug($post->content);
+        }
         return view('index',['posts'=>$posts]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -47,13 +54,13 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Log::debug($request->all());
+        // Log::debug($request->all());
         $post = new PostEloquent($request->all());
         $post->authors = Auth::user()->account;
         $post->save();
-
-        $posts = PostEloquent::orderBy('created_at','DESC')->get();
-        return view('index',['posts'=>$posts,'msg'=>'新增文章成功']);
+        return Redirect::route('post.index');
+        // $posts = PostEloquent::orderBy('created_at','DESC')->get();
+        // return view('index',['posts'=>$posts,'msg'=>'新增文章成功']);
     }
 
     /**
@@ -65,7 +72,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = PostEloquent::findOrFail($id);
-        return view('post',['post'=>$post]);
+        $comments = CommnetEloquent::where('post_id',$id)->get();
+        return view('post',['post'=>$post,'comments'=>$comments]);
     }
 
     /**
@@ -94,8 +102,8 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->save();
 
-        $posts = PostEloquent::orderBy('created_at','DESC')->get();
-        return view('index',['posts'=>$posts,'msg'=>'修改文章成功']);
+        $msg = '修改文章成功';
+        return Redirect::route('post.index',['msg'=>$msg]);
 
     }
 
@@ -109,8 +117,9 @@ class PostController extends Controller
     {
         $post = PostEloquent::findOrFail($id);
         $post->delete();
-
-        $posts = PostEloquent::orderBy('created_at','DESC')->get();
-        return view('index',['posts'=>$posts,'msg'=>'刪除文章成功']);
+        return Redirect::route('post.index');
     }
+
+
+
 }

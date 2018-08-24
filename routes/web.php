@@ -28,7 +28,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'PostController@index');
 
+// Route::get('/{msg}', 'PostController@indexWithMsg')->name('msg');
+
 Route::resource('post','PostController');
+Route::resource('comment','commentController');
+
+Route::post('comment/{id}','CommentController@store');
+
 
 //登入註冊路由
 // Route::get('login','Auth/AuthController@getLogin');
