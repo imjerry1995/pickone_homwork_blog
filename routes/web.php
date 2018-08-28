@@ -31,7 +31,7 @@ Route::get('/', 'PostController@index');
 // Route::get('/{msg}', 'PostController@indexWithMsg')->name('msg');
 
 Route::resource('post','PostController');
-Route::resource('comment','commentController');
+Route::resource('comment','CommentController');
 
 Route::post('comment/{id}','CommentController@store');
 
