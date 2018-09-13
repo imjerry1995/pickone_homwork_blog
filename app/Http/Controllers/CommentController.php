@@ -40,10 +40,13 @@ class CommentController extends Controller
      */
     public function store($post_id,CommentRequest $request)
     {
-        $comment = new CommentEloquent($request->all());
-        $comment->post_id = $post_id;
+        $comment = new CommentEloquent([
+            'post_id'=> $post_id,
+            'name'=>$request->get('name'),
+            'content' => $request->get('content')
+        ]);
         $comment->save();
-        return Redirect::back();
+        return $comment;
     }
 
     /**
@@ -54,7 +57,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $comments = CommentEloquent::where('post_id',$id)->get();
+        return $comments;
     }
 
     /**
@@ -90,6 +94,6 @@ class CommentController extends Controller
     {
         $comment = CommentEloquent::findOrFail($id);
         $comment->delete();
-        return Redirect::back();
+        return $comment;
     }
 }

@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+Route::get('/react', function () {
+    return view('welcome');
+});
 
 
 

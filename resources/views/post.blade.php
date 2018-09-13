@@ -14,7 +14,9 @@
     <div class="col-md-8">
         <div class="content">
             <div class="row">
-                
+                    <div class="col-sm-12">
+                        <div id="comment"></div>
+                    </div>
                     <div class="article col-sm-12">
                         @if(Auth::check())
                             @if(Auth::user()->account == $post->authors)
@@ -96,7 +98,10 @@
                                 <button type="submit" class="btn btn-default edit">送出</button>
                             </form>
                         </div>
+                        
                     </div>
+
+                    
             </div>
         </div>
     </div>
